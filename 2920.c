@@ -2,47 +2,56 @@
 
 int		main(void)
 {
-	int i;
-	int num_a;
-	int num_d;
-	int num[15];
-	char s[15];
+	int		i;
+	char	num_a;
+	char	num_d;
+	char	s[16];
 
 	i = 0;
-	num_a = 0;
-	num_d = 15;
-	scanf("%[^\n]s", s);
-	while (i < 15)
+	num_a = '1';
+	num_d = '8';
+	while (i < 16)
 	{
-		num[i] = (int)s[i];
+		scanf("%[^\n]c", &s[i]);
 		i++;
 	}
-	while (--i > 0)
-		printf("%d\n", num[i]);
-	while (--i > 0)
+	if (!(s[0] == '1' || s[0] == '8'))
 	{
-		if (num[i] != num_d)
-			break;
-		num_d -= 1;
-	}
-	if (num_d == 0)
-	{
-		printf("descending");
-		return (0);
+		puts("mixed");
+		return 0;
 	}
 	i = 0;
-	while (i++ < 15)
+	while (i <= 14)
 	{
-		if (num[i] != num_a)
-			break;
-		num_a += 1;
+		if (s[i] == num_a)
+		{
+			if (i == 14 && num_a == '8')
+			{
+				puts("ascending");
+				return 0;
+			}
+			num_a++;
+		}
+		else
+			break ;
+		i += 2;
 	}
-	if (num_a == 15)
+	i = 0;
+	while (i <= 14)
 	{
-		printf("ascending");
-		return (0);
+		if (s[i] == num_d)
+		{
+			if (i == 14 && num_d == '1')
+			{
+				puts("descending");
+				return 0;
+			}
+			num_d--;
+		}
+		else
+			break ;
+		i += 2;
 	}
-	else
-		printf("mixed");
+	puts("mixed");
 	return 0;
 }
